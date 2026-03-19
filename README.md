@@ -1,329 +1,339 @@
 # ShiftSure
-### AI-Powered Weekly Income Protection for Food Delivery Riders
 
-ShiftSure is a hyperlocal AI-powered parametric income protection platform for urban food delivery riders. It dynamically prices weekly coverage, monitors external disruption signals such as heavy rain, flooding, extreme heat, severe pollution, and access restrictions, detects suspicious claims using AI, and automatically simulates payouts for lost earnings.
+**ShiftSure is a cross-platform mobile app that protects food delivery riders from short-term income loss caused by external disruptions like heavy rain, flooding, extreme heat, severe pollution, and access restrictions.**
 
----
+We are building this for urban delivery riders who work shift-to-shift and lose real income when the city becomes temporarily undeliverable. Instead of making them file manual claims, ShiftSure uses a parametric model: when disruption conditions cross a defined threshold in the rider’s operating zone, the system automatically evaluates eligibility, runs fraud checks, and simulates payout.
 
-## Problem Statement
+The product is intentionally narrow. We are not trying to solve “insurance for everyone.” We are focused on one real use case: **weekly income protection for food delivery riders in high-disruption urban zones**. That focus makes the product easier to trust, easier to price, and much more realistic to build.
 
-Platform-based food delivery riders are critical to India’s urban economy, but their earnings remain highly vulnerable to uncontrollable external disruptions. Events such as heavy rainfall, waterlogging, extreme heat, severe air pollution, and sudden road or zone restrictions can sharply reduce their active delivery hours and cause immediate income loss. Existing protection systems do not address this short-term income volatility in a practical, accessible, and worker-friendly way.
+## The problem
 
-ShiftSure solves this problem through a **parametric insurance model** designed specifically for food delivery riders. Instead of asking workers to submit lengthy manual claims, the platform continuously monitors predefined external conditions. When those conditions cross a payout threshold in the worker’s insured operating zone, the system automatically identifies eligibility, validates activity and location consistency, and initiates a simulated payout.
+Food delivery riders work in a fragile earning model. A missed lunch shift or evening shift is not a small inconvenience — it directly hits that week’s income.
 
-This solution is intentionally designed around the hackathon’s required constraints:
-- coverage is strictly limited to **income loss**
-- no health, life, accident, or vehicle-repair protection is included
-- pricing is structured on a **weekly basis**
-- AI is used for **risk assessment**, **fraud detection**, and **predictive analytics**
-- claims are triggered through **parametric external events** rather than traditional manual documentation
+In cities like Chennai, this problem gets worse during heavy rain, waterlogging, extreme heat, poor air quality, or sudden access restrictions. Riders are expected to stay available, but the city itself often becomes partially undeliverable. The result is simple: fewer completed deliveries, fewer working hours, and less money taken home.
 
----
+Traditional insurance products are not built for this kind of loss. They are too broad, too slow, and too paperwork-heavy for a worker who needs short-cycle protection. What is missing is a lightweight income protection layer that works the same way these workers already live and earn: **weekly, mobile-first, and based on real external conditions**. :contentReference[oaicite:0]{index=0}
 
-## Why This Matters
+## Who this is for
 
-Food delivery riders work in a highly variable, shift-based earning environment. A single day of disruption during peak lunch or evening windows can materially affect weekly take-home income. However, traditional insurance products are not designed for this type of short-cycle, hyperlocal, operational risk.
+We chose to focus on **food delivery riders in Chennai**, especially riders working on platforms like Swiggy and Zomato.
 
-ShiftSure introduces a more practical model:
-- **low-friction weekly premiums**
-- **hyperlocal risk-based pricing**
-- **zero-touch claims**
-- **fast simulated payouts**
-- **clear transparency for both workers and insurers**
+This was a deliberate choice. Food delivery is one of the clearest examples of disruption-linked income loss:
+- riders work outdoors
+- earnings depend on short working windows
+- weather and mobility conditions directly affect order completion
+- the impact is immediate and easy to understand
 
----
+### Example persona
 
-## Persona Focus
+**Rahul**, 24, is a delivery rider in Chennai. He usually works two strong earning windows: lunch and evening. On days with heavy rain, flooding, or extreme heat, he may still be “working,” but practically he completes far fewer deliveries. A few bad disruption days in a week can materially cut his income.
 
-### Primary Persona
-**Urban food delivery riders in Chennai working for platforms such as Swiggy and Zomato**
+ShiftSure is designed for someone like Rahul — not as a general insurance product, but as a focused income continuity tool.
 
-### Why This Persona
-We deliberately narrowed our scope to a specific and operationally realistic user segment rather than attempting to solve for all gig workers at once.
+## Our approach
 
-This persona is strong because:
-- food delivery riders are directly exposed to outdoor disruption risk
-- Chennai provides a strong real-world context for weather, flooding, heat, and pollution-related earning disruptions
-- the relationship between disruption and lost earnings is easy to explain and demonstrate
-- the weekly earning cycle maps well to a weekly premium model
+ShiftSure is a **parametric income protection app**.
 
-### Example Persona
-**Rahul**, a 24-year-old Swiggy delivery rider in Chennai, works lunch and evening shifts. His earnings depend on completing enough deliveries during a small number of high-value working windows. During heavy rain, severe heat, or flooded road conditions, he may lose multiple productive hours in a single day. ShiftSure protects his income during these uncontrollable events.
+That means we do not wait for the rider to manually prove loss in the traditional sense. Instead, the app monitors predefined disruption signals in the rider’s insured operating zone. If the disruption crosses an agreed threshold, the system automatically checks whether:
+- the rider has an active policy
+- the rider’s zone matches the affected area
+- the event is valid
+- the claim passes fraud checks
 
----
+If those conditions are satisfied, the app creates a claim and simulates payout.
 
-## Our Solution
+This is a much better fit for gig workers than traditional claims-heavy insurance. It is faster, simpler, and easier to explain.
 
-ShiftSure is a **web-first AI-enabled parametric income protection platform** built for food delivery riders.
+## How the app works
 
-The system:
-1. onboards the rider with basic profile and operating-zone data
-2. generates a risk score using AI
-3. recommends a weekly premium and coverage slab
-4. continuously monitors external disruption signals
-5. automatically creates a claim when the disruption threshold is crossed
-6. runs fraud checks before approval
-7. simulates instant payout
-8. provides dashboards for both workers and insurer/admin users
+1. The rider signs up in the mobile app and selects their operating zone.
+2. ShiftSure calculates a weekly risk score using zone-level and disruption-related signals.
+3. Based on that score, the rider gets a weekly premium and protection plan.
+4. Once the plan is active, the backend keeps monitoring disruption events.
+5. If a valid disruption affects the rider’s zone, the system automatically checks eligibility.
+6. A fraud layer verifies location and claim consistency.
+7. If approved, the claim is created and payout is simulated.
+8. The rider sees the reason, status, and protected amount in the app.
 
----
+On the admin side, the system also shows exposure by zone, claims triggered, suspicious cases, and risk trends.
 
-## Why Parametric Insurance
+## Weekly premium model
 
-Traditional insurance relies on manual filing, documentation, and delayed claim investigation. That model is too slow and too operationally heavy for gig workers who need rapid short-term income continuity.
+We did not want pricing to feel like fake “insurance math.” The brief is clear that pricing should be weekly, and that actually makes sense for this audience. Food delivery riders think in weekly earnings, not annual policy cycles. So the product should too. :contentReference[oaicite:1]{index=1}
 
-ShiftSure uses a **parametric insurance approach**, where payouts are triggered by predefined measurable conditions rather than manual damage assessment.
+ShiftSure uses a **weekly micro-premium model** with a simple base plan and a risk adjustment layer on top.
 
-Examples:
-- rainfall exceeds a threshold in the rider’s delivery zone
-- AQI crosses a severe threshold
-- heat index reaches unsafe outdoor-work levels
-- road access or zone restrictions block normal delivery activity
+### Base plans
 
-This allows the platform to automate protection in a way that feels immediate, transparent, and scalable.
+| Plan | Weekly Premium | Daily Protection |
+|------|----------------|------------------|
+| Basic | ₹19/week | up to ₹250/day |
+| Standard | ₹29/week | up to ₹400/day |
+| Plus | ₹45/week | up to ₹600/day |
 
----
+These are not final actuarial numbers. They are product-facing plan bands that make the pricing easy to understand in the app.
 
-## Core Features
+### How pricing is adjusted
 
-### 1. AI-Powered Risk Assessment
-ShiftSure calculates a worker-specific weekly risk score based on:
+The final premium is not flat across the city. A rider operating in a low-disruption zone should not pay the same as a rider working in a flood-prone or heat-heavy area.
+
+So ShiftSure adjusts pricing using a risk score built from:
 - operating zone
-- historical weather severity
-- flood/waterlogging exposure
-- extreme heat exposure
-- pollution exposure
-- disruption frequency
-- shift pattern
-- approximate earnings band
-
-This risk score drives:
-- premium recommendation
-- coverage slab recommendation
-- portfolio risk segmentation
-
-### 2. Dynamic Weekly Pricing
-Unlike traditional annual or monthly plans, ShiftSure is intentionally designed around the weekly earning cycle of gig workers. Pricing is recalculated through a weekly model to remain affordable, explainable, and aligned with short-cycle income patterns.
-
-### 3. Parametric Trigger Monitoring
-The platform continuously checks external disruption signals and evaluates whether a worker’s insured zone has crossed a payout threshold.
-
-### 4. Automatic Claims
-When the system detects a valid disruption affecting an insured worker’s zone, the claim is automatically initiated without requiring the worker to manually submit paperwork.
-
-### 5. AI-Based Fraud Detection
-ShiftSure applies fraud checks such as:
-- GPS mismatch with registered operating zone
-- duplicate claims for the same event window
-- abnormal claim frequency
-- event-to-activity inconsistency
-- suspicious movement patterns
-
-### 6. Instant Payout Simulation
-Approved claims are routed to a mock payout engine to simulate how a worker would receive compensation through a digital payment flow.
-
-### 7. Dual Dashboards
-The platform includes:
-- a **worker dashboard** showing active coverage, protected earnings, and payout history
-- an **admin dashboard** showing risk distribution, exposure, fraud alerts, loss ratios, and predictive claim insights
-
----
-
-## Parametric Trigger Framework
-
-We designed ShiftSure around five core disruption classes that directly affect a food delivery rider’s ability to earn.
-
-### Trigger 1: Heavy Rain
-**Condition:** rainfall intensity crosses the defined threshold in the rider’s active zone  
-**Example threshold:** rainfall > 80 mm in a defined time window  
-**Impact:** rider cannot safely operate outdoors
-
-### Trigger 2: Flood / Waterlogging
-**Condition:** flood severity or waterlogging risk crosses the defined threshold  
-**Impact:** roads become inaccessible and deliveries are disrupted
-
-### Trigger 3: Extreme Heat
-**Condition:** temperature or heat index exceeds safe outdoor delivery thresholds  
-**Impact:** working conditions become unsafe and active hours fall
-
-### Trigger 4: Severe Air Pollution
-**Condition:** AQI exceeds a severe-risk threshold  
-**Example threshold:** AQI > 400  
-**Impact:** extended outdoor work becomes unsafe
-
-### Trigger 5: Access Restriction / Mobility Disruption
-**Condition:** sudden road closure, zone restriction, curfew, or severe traffic blockade  
-**Impact:** pickup/drop routes become inaccessible
-
----
-
-## Trigger Logic
-
-A worker becomes eligible for claim creation when all of the following are true:
-
-- disruption threshold is breached
-- policy is active
-- worker’s operating zone matches the affected zone
-- fraud score is below rejection threshold
-
-### Disruption Severity Index
-To make trigger handling more robust, ShiftSure uses a combined disruption score:
-
-`DSI = Weather Score + Environmental Score + Mobility Score`
-
-Where:
-- **Weather Score** captures rainfall, flooding, and heat severity
-- **Environmental Score** captures AQI severity
-- **Mobility Score** captures road restriction, closure, or congestion severity
-
-If the **Disruption Severity Index** crosses a configured threshold, the worker becomes eligible for automated claim evaluation.
-
----
-
-## Weekly Pricing Model
-
-The weekly pricing model is designed to match the short earning cycle of delivery riders while preserving affordability and explainability.
-
-### Base Plans
-
-| Plan | Weekly Premium | Daily Income Protection | Ideal User Segment |
-|------|----------------|-------------------------|--------------------|
-| Basic | ₹19/week | up to ₹250/day | Low-risk zones |
-| Standard | ₹29/week | up to ₹400/day | Medium-risk zones |
-| Plus | ₹45/week | up to ₹600/day | High-risk zones |
-
-### AI-Based Premium Adjustment
-The final weekly premium is adjusted using an AI-generated risk score.
-
-#### Inputs
-- zone-level disruption history
-- rainfall risk
-- flooding frequency
+- rainfall severity history
+- flood / waterlogging exposure
 - heat exposure
 - AQI severity
-- worker shift pattern
-- operating intensity
-- approximate earnings band
+- disruption frequency
+- shift timing
 
-#### Outputs
-- risk score (0–100)
-- recommended plan
-- premium adjustment
+That gives us **hyperlocal weekly pricing**, which feels much more honest than a city-wide flat premium.
+
+### Why this model works
+
+The goal is not to maximize pricing complexity. The goal is to keep the model:
+- affordable
+- explainable
+- adaptable
+- realistic for gig workers
+
+A weekly model also makes the demo stronger. It is easier to show why a rider paid ₹29 this week and got protected during a disruption than to explain some larger long-term policy construct.
+
+## Parametric triggers
+
+The app only works if the triggers are believable.
+
+We are not building a vague “claim when something bad happens” system. We are defining a small set of external, measurable events that directly affect a rider’s ability to earn.
+
+### Trigger set
+
+#### 1. Heavy rain
+Used when rainfall crosses a defined threshold in the rider’s operating zone.
+
+#### 2. Flood / waterlogging
+Used when road conditions or flood severity make delivery movement impractical.
+
+#### 3. Extreme heat
+Used when temperature or heat index makes sustained outdoor work unsafe.
+
+#### 4. Severe air pollution
+Used when AQI crosses a severe threshold and prolonged outdoor work becomes risky.
+
+#### 5. Access restriction / mobility disruption
+Used when the rider’s area is affected by road closure, zone restriction, curfew, or severe traffic blockage.
+
+### Trigger logic
+
+A claim becomes eligible only when:
+- the disruption threshold is crossed
+- the rider has an active policy
+- the affected zone matches the rider’s insured zone
+- the fraud score is within an acceptable range
+
+This matters because we want the product to feel automated, but not careless.
+
+### Why parametric works here
+
+This use case is a strong fit for parametric insurance because the source of loss is external and measurable. We are not trying to judge damage after the fact. We are responding to disruption conditions that can be tracked in near real time. That keeps the workflow much cleaner than traditional claims handling. :contentReference[oaicite:2]{index=2}
+
+## Where AI/ML fits
+
+A lot of hackathon projects say they use AI, but only use it as decoration. We wanted it to sit in parts of the workflow where it actually changes product behavior.
+
+ShiftSure uses AI/ML in three places.
+
+### 1. Premium calculation
+
+The first use is risk-based pricing. We use disruption-related signals to estimate how exposed a rider is to short-term income loss in a given zone.
+
+Inputs include:
+- historical rainfall patterns
+- flood exposure
+- AQI severity
+- heat intensity
+- zone-level disruption frequency
+- rider shift pattern
+
+Output:
+- a risk score
+- recommended weekly premium band
 - suggested protection band
 
-### Example Hyperlocal Pricing
-- low-risk zone rider → ₹22/week
-- flood-prone zone rider → ₹38/week
-- high heat + high pollution corridor rider → ₹34/week
+This is the most direct AI use in the product because it affects what the rider sees at onboarding.
 
-This gives us a strong differentiator: **hyperlocal risk-based weekly pricing**, rather than city-wide flat premiums.
+### 2. Fraud detection
 
----
+We also use ML-driven logic to score suspicious claims.
 
-## AI Architecture
-
-ShiftSure uses AI in three distinct layers.
-
-### A. Risk Scoring Engine
-This engine predicts the likelihood of disruption-driven income loss for a worker.
-
-**Inputs**
-- operating zone
-- historical weather patterns
-- flood exposure
-- AQI history
-- heat risk
-- shift timing and work pattern
-
-**Outputs**
-- risk score
-- premium recommendation
-- protection slab recommendation
-
-### B. Fraud Detection Engine
-This engine detects suspicious claim behavior.
-
-**Signals**
-- GPS mismatch
-- duplicate event-window claims
+This includes checks like:
+- GPS mismatch with insured zone
+- duplicate claims for the same disruption window
 - abnormal claim frequency
-- impossible activity patterns
-- mismatch between claimed zone and disruption zone
+- event mismatch
+- inconsistent rider activity patterns
 
-**Outputs**
-- fraud risk score
-- approve / flag / reject suggestion
+The point is not to reject claims aggressively. The point is to stop the system from being trivially exploitable.
 
-### C. Predictive Operations Engine
-This engine supports the admin dashboard with forward-looking operational intelligence.
+### 3. Predictive admin insights
 
-**Outputs**
-- next week’s high-risk zones
-- expected claim load
-- expected payout burden
-- zone-wise exposure hotspots
-- emerging loss-ratio concerns
+The third use is on the admin side. We want the insurer view to show more than just counts and charts.
 
-This layered AI architecture helps ShiftSure look less like a simple app and more like an insurtech decision platform.
+So the system will also estimate:
+- which zones are likely to become high-risk next week
+- where claim pressure may rise
+- where payout burden is clustering
 
----
+That makes the platform feel like an operational risk system, not just a worker app.
 
-## System Workflow
+### Why we kept the AI practical
 
-### Worker Flow
-1. rider signs up and enters basic profile information
-2. platform, city, operating zone, and earnings band are captured
-3. AI risk engine generates a worker risk score
-4. system recommends weekly premium and coverage
-5. worker activates policy
-6. trigger engine continuously monitors disruption signals
-7. if a valid event affects the rider’s insured zone, a claim is automatically created
-8. fraud engine validates consistency
-9. payout engine simulates instant compensation
-10. rider sees the payout reason and protected earnings summary
+We are intentionally keeping the ML explainable. For this use case, a clear and interpretable risk/fraud model is more useful than a complicated model that looks impressive but is hard to trust.
 
-### Admin Flow
-1. monitor active policies
-2. view zone-level exposure
-3. track live disruption events
-4. review fraud alerts
-5. analyze claim trends
-6. monitor expected next-week risk and payout burden
+## Why mobile, not web
 
----
+We chose to build ShiftSure as a **cross-platform mobile app** because that is where this product actually belongs.
 
-## Platform Choice: Why Web First
+Food delivery riders already work through their phones. Their navigation, shift flow, earnings tracking, order handling, and communication all happen on mobile. Asking them to manage income protection from a desktop-first product would be unnatural.
 
-We chose a **web-first platform** for the hackathon phase because:
-- it is faster to prototype and demonstrate
-- it supports both worker and admin experiences in one product
-- it is better suited for analytics dashboards
-- it reduces development friction during the early build stage
+### Why mobile is the right product decision
 
-In a real-world product, ShiftSure can later expand to a mobile-first worker experience. For the hackathon, web-first gives the best balance between speed, clarity, and demo quality.
+- riders need access during live work shifts
+- location-aware checks are easier on mobile
+- policy alerts and payout updates make more sense as mobile interactions
+- onboarding is faster in an app flow
+- it matches how gig workers already use digital tools
 
----
+### Why cross-platform
 
-## System Architecture
+We want one codebase and fast iteration during the hackathon, so we are building with **Flutter**. That gives us Android and iOS support without splitting effort.
 
-### High-Level Architecture
+The worker experience is mobile-first.  
+The admin experience can still be supported through a lightweight dashboard later, but the main product is the rider app.
 
-```text
-Worker Web App / Admin Dashboard
-            │
-            ▼
-         API Gateway
-            │
- ┌──────────┼──────────┐
- ▼          ▼          ▼
-Worker   Policy     Claim Service
-Service  Service        │
-            │           ▼
-            ▼      Fraud Engine
-        Risk Engine      │
-            │           ▼
-            └────► Trigger Engine
-                        │
-                        ▼
-                External APIs / Mock Feeds
-         (Weather, AQI, Mobility, Curfew, Payout)
+This was a deliberate product choice, not a technical convenience.
+
+## Tech stack
+
+We picked the stack with one constraint in mind: it should be fast enough for a hackathon, but not so hacky that the product falls apart the moment we add real workflows.
+
+### Mobile app
+- **Flutter** for cross-platform development
+- Dart
+- Riverpod for state management
+- GoRouter for navigation
+- Supabase Flutter SDK for auth and data access
+
+Flutter gives us a single codebase for Android and iOS, which matters in a short build window. More importantly, it fits the product well: ShiftSure needs location-aware flows, notification-friendly UX, and a fast mobile onboarding experience.
+
+### Backend
+- **FastAPI**
+- Python
+- background jobs for trigger monitoring
+- REST APIs for app/backend communication
+
+We chose FastAPI because the project already needs Python for the AI/ML side. Keeping the backend and model-serving layer in the same ecosystem reduces friction and speeds up iteration.
+
+### Database and backend platform
+- **Supabase**
+- PostgreSQL
+- Supabase Auth
+- Row Level Security
+- Realtime subscriptions
+
+Supabase gives us a strong base without wasting time on boilerplate backend setup. It is a good fit for hackathons because it handles auth, database, and realtime updates cleanly, while still giving us PostgreSQL underneath for proper relational modeling.
+
+### AI / ML
+- Python
+- Pandas
+- scikit-learn
+- anomaly detection techniques for fraud scoring
+
+We are deliberately keeping the ML stack practical. We do not need exotic models to prove the product. We need models that are explainable enough to justify pricing and credible enough to flag suspicious claims.
+
+### External integrations
+- weather API
+- AQI API
+- mobility / access disruption feed
+- payout simulation layer
+- location/GPS validation from the app
+
+These integrations are what make the product feel real. The point of ShiftSure is not just to show UI screens — it is to connect app behavior to measurable external conditions.
+
+## Development plan
+
+We are treating the build in the same order the product needs to work.
+
+### Phase 1 — Foundation
+- lock persona and product scope
+- define pricing model
+- define trigger framework
+- design app flow
+- define backend services
+- document architecture and README
+
+### Phase 2 — Core product
+- build rider onboarding flow
+- build policy creation flow
+- connect Supabase auth and database
+- implement weekly premium calculation
+- implement trigger monitoring service
+- create automated claim flow
+
+### Phase 3 — Intelligence and polish
+- add fraud scoring
+- add predictive admin metrics
+- simulate payout workflow
+- improve rider claim visibility
+- prepare demo scenario and final presentation
+
+The goal is not to overbuild. The goal is to make sure the product works end-to-end: onboarding, pricing, trigger detection, claim generation, fraud check, payout simulation.
+
+## What makes this product different
+
+A lot of teams will build something that looks like insurance software. We are trying to build something that feels like it actually belongs in the daily workflow of a delivery rider.
+
+What makes ShiftSure stronger:
+
+### 1. Narrow scope
+We are not solving for every gig worker. We are solving one sharp problem for one sharp user group.
+
+### 2. Mobile-first by design
+This is not a web dashboard pretending to be useful for riders. The product is designed around the device they already use for work.
+
+### 3. Hyperlocal pricing
+We are not using one flat premium across the city. Risk is tied to operating conditions.
+
+### 4. Zero-touch claims
+The system is designed to reduce manual effort, which is exactly where traditional insurance fails for this audience.
+
+### 5. Practical AI
+AI is used where it changes decisions: pricing, fraud checks, and admin foresight — not as decoration.
+
+## Scope boundaries
+
+To keep the project disciplined and aligned with the brief, ShiftSure only covers **income loss caused by external disruptions**.
+
+We are **not** covering:
+- health insurance
+- accident claims
+- life insurance
+- vehicle repair
+- general reimbursement workflows
+
+That boundary is important. It keeps the product coherent and stops it from becoming a vague “insurance app” with too many disconnected use cases. :contentReference[oaicite:3]{index=3}
+
+## Team
+
+| Member | Role | Responsibility |
+|--------|------|----------------|
+| Member 1 | AI / ML Engineer | Risk modeling, premium calculation, fraud detection |
+| Member 2 | Backend Engineer / Team Lead | Insurance workflow, APIs, claim automation, architecture |
+| Member 3 | Frontend Engineer | Rider app, UX, policy and claim flows |
+| Member 4 | Integration & DevOps | External APIs, payout simulation, deployment, demo, presentation |
+
+## Closing note
+
+ShiftSure is our attempt to build something narrow, honest, and actually usable.
+
+The core idea is simple: if external disruption is measurable, then short-term income protection for riders should not depend on slow, manual, traditional claims logic. It should be mobile, lightweight, and responsive to real operating conditions.
+
+That is what we are building.
