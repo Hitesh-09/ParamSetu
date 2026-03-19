@@ -403,6 +403,16 @@ For the hackathon prototype, we are not depending on full live Swiggy or Zomato 
 This gives us a practical way to simulate platform-side activity validation without needing direct production platform APIs.
 
 ---
+Mobile App (Flutter)
+        ↓
+FastAPI Backend
+        ↓
+Supabase (Auth + PostgreSQL + Realtime)
+        ↓
+AI/ML Services + Trigger Engine
+        ↓
+Weather / AQI / Mobility / Payout Feeds
+---
 
 ## Dashboard metrics
 
