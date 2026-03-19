@@ -31,9 +31,9 @@ This was a deliberate choice. Food delivery is one of the clearest examples of d
 
 ### Example persona
 
-Rahul, 24, is a delivery rider in Chennai. He usually works two strong earning windows: lunch and evening. On days with heavy rain, flooding, or extreme heat, he may still be “working,” but practically he completes far fewer deliveries. A few bad disruption days in a week can materially cut his income.
+Dhrouv, 24, is a delivery rider in Chennai. He usually works two strong earning windows: lunch and evening. On days with heavy rain, flooding, or extreme heat, he may still be “working,” but practically he completes far fewer deliveries. A few bad disruption days in a week can materially cut his income.
 
-Param Setu is designed for someone like Rahul — not as a general insurance product, but as a focused income continuity tool.
+Param Setu is designed for someone like Dhrouv — not as a general insurance product, but as a focused income continuity tool.
 
 ---
 
