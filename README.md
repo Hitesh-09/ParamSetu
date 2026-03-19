@@ -43,9 +43,9 @@ This was a deliberate choice because food delivery is one of the clearest cases 
 
 ### Example persona
 
-**Rahul, 24**, is a food delivery rider in Chennai. He usually earns most during lunch and evening windows. On days with heavy rain, flooding, or extreme heat, he may still be online, but he completes far fewer deliveries. Two or three disruption-heavy days in a week can materially reduce his income.
+**Sujeet, 24**, is a food delivery rider in Chennai. He usually earns most during lunch and evening windows. On days with heavy rain, flooding, or extreme heat, he may still be online, but he completes far fewer deliveries. Two or three disruption-heavy days in a week can materially reduce his income.
 
-Param Setu is designed for someone like Rahul, not as a general insurance product, but as a focused income continuity tool.
+Param Setu is designed for someone like Sujeet, not as a general insurance product, but as a focused income continuity tool.
 
 ---
 
@@ -227,10 +227,10 @@ A payout is triggered only when:
 
 ## Sample claim scenario
 
-Rahul is on the **Standard plan** and has insured his Chennai delivery zone.
+Sujeet is on the **Standard plan** and has insured his Chennai delivery zone.
 
-- rainfall in Rahul’s zone crosses **80 mm in 6 hours**
-- Rahul is marked active during the evening shift
+- rainfall in Sujeet’s zone crosses **80 mm in 6 hours**
+- Sujeet is marked active during the evening shift
 - the zone matches his insured area
 - the disruption window is valid
 - fraud and activity checks pass
