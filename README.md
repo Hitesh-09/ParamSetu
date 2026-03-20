@@ -1,550 +1,375 @@
 # Param Setu
 
-**Demo Video:** [Watch here](https://drive.google.com/drive/folders/1arCwVFGw_CmgI0mQX2kPyofoJNe0fPl4?usp=sharing)
+> **Mobile-first parametric insurance for food delivery riders** — automatic income protection when external disruption strikes.
 
-Param Setu is a mobile-first parametric insurance platform built for food delivery riders in Chennai. It protects short-term income when external conditions like heavy rain, flooding, extreme heat, severe pollution, or access restrictions make delivery work temporarily unsafe or impractical.
-
-Instead of making riders file slow, manual claims, Param Setu monitors measurable disruption signals in the rider’s insured operating zone. When a defined threshold is crossed, the system checks eligibility, runs fraud controls, and simulates payout.
-
-We are deliberately solving one narrow problem well: **loss-of-income protection for food delivery riders working week-to-week in high-disruption urban zones.**
+**📹 Phase 1 Demo:** [Watch here](https://drive.google.com/drive/folders/1arCwVFGw_CmgI0mQX2kPyofoJNe0fPl4?usp=sharing)
 
 ---
 
-## The problem
+## Quick Overview
 
-Food delivery riders work in a fragile earnings model. Missing a lunch or evening shift is not a small inconvenience; it directly reduces that week’s income.
-
-In cities like Chennai, this becomes worse during:
-- heavy rain
-- flooding / waterlogging
-- extreme heat
-- severe air pollution
-- zone closures or mobility restrictions
-
-Riders may still be “available,” but practically complete fewer deliveries, lose working hours, and take home less income. Traditional insurance is a poor fit for this kind of loss. It is too broad, too slow, and too claims-heavy for workers who live and earn on short cycles.
-
-What is missing is a lightweight protection layer built around how these workers already operate:
-- weekly
-- mobile-first
-- based on real external conditions
-- simple enough to trust
+| Aspect | Details |
+|--------|---------|
+| **What** | Automatic income protection tied to measurable disruption (rain, flood, heat, pollution, access blocks) |
+| **For** | Food delivery riders in Chennai (Swiggy, Zomato) |
+| **How** | Parametric claim automation — no slow manual claims process |
+| **Pricing** | Weekly micro-premiums (₹19–₹45/week) with zone-based risk adjustment |
+| **Target** | Riders earning week-to-week who lose income during disruption windows |
 
 ---
 
-## Chosen persona
+## Table of Contents
 
-We focused on **food delivery riders in Chennai**, especially riders working on platforms like Swiggy and Zomato.
-
-This was a deliberate choice because food delivery is one of the clearest cases of disruption-linked income loss:
-- riders work outdoors
-- earnings depend on short shift windows
-- weather and mobility conditions directly affect order completion
-- the impact is immediate and easy to understand
-
-### Example persona
-
-**Sujeet, 24**, is a food delivery rider in Chennai. He usually earns most during lunch and evening windows. On days with heavy rain, flooding, or extreme heat, he may still be online, but he completes far fewer deliveries. Two or three disruption-heavy days in a week can materially reduce his income.
-
-Param Setu is designed for someone like Sujeet, not as a general insurance product, but as a focused income continuity tool.
+- [The Problem](#the-problem)
+- [How It Works](#how-it-works)
+- [Pricing & Plans](#weekly-pricing-model)
+- [Triggers & Payouts](#disruption-triggers)
+- [Fraud Prevention](#fraud-prevention)
+- [Tech Stack](#tech-stack)
+- [Next Steps](#development-phases)
 
 ---
 
-## What Param Setu does
+## The Problem
 
-Param Setu is a **parametric income protection app**.
+Food delivery riders live paycheck-to-paycheck, week-to-week. Missing one shift window isn't just bad luck — it's directly lost income.
 
-That means the rider does not need to prove loss through traditional, manual claims handling. Instead, the platform monitors predefined disruption signals in the rider’s insured zone and automatically checks whether:
+**When disruption hits in Chennai:**
+- Heavy rain
+- Flooding and waterlogging  
+- Extreme heat
+- Severe air pollution
+- Zone closures and mobility restrictions
 
-- the rider has an active weekly policy
-- the disruption threshold has been crossed
-- the affected zone matches the insured zone
-- the rider was active during the affected shift window
-- the claim passes fraud checks
+**The result:** Riders stay "available" on the app but complete far fewer deliveries.
 
-When those conditions are satisfied, the system creates a claim and simulates payout.
+### Why traditional insurance fails
 
-This makes the workflow:
-- faster
-- cleaner
-- easier to explain
-- better suited to gig workers than traditional claims-heavy insurance
+Traditional insurance is:
+- **Too broad** — Designed for rare, catastrophic events, not weekly income drops
+- **Too slow** — Manual claims take weeks; riders need income now
+- **Too heavy** — Claims require proof and documentation; gig workers can't wait
+- **Built for annuals** — Annual policies don't match weekly earning patterns
+
+What's missing: **A lightweight, automatic, mobile-first protection layer built around how riders actually work.**
 
 ---
 
-## Workflow
+## Chosen Persona
 
-## Workflow diagram
+We focused on **food delivery riders in Chennai** — specifically those working on Swiggy and Zomato.
+
+This is intentional. Food delivery is one of the clearest loss-of-income cases:
+- Riders work outdoors
+- Income depends on short, predictable shift windows
+- Weather directly affects order completion
+- The impact is immediate and measurable
+
+### Meet Sujeet
+
+**Sujeet, 24** — A delivery rider in Chennai.
+
+- Earns most during lunch (12–3 PM) and evening (7–10 PM) shifts
+- On heavy rain days, he stays online but completes 40% fewer deliveries
+- A 2–3 day disruption week cuts his income noticeably
+- He needs fast, simple protection, not insurance paperwork
+
+**Param Setu is built for riders like Sujeet.**
+
+---
+
+## How It Works
+
+**Parametric Insurance** = Automatic payouts without manual claims.
+
+Instead of asking "Did you lose income?", the system asks:
+> "Did an external disruption event cross the threshold in your insured zone while you were working?"
+
+If yes → automatic claim → instant payout simulation.
+
+---
+
+## The Flow
+
+**Rider:**  
+Sign up → Select zone & shift → Get risk score → Activate policy → Receive alerts & payouts
+
+**System:**  
+Monitor disruption feeds → Cross threshold? → Map zones → Shortlist riders → Fraud check → Auto-claim → Simulate payout
+
+### Workflow
 
 ```mermaid
 flowchart TD
-    A[Rider signs up in Flutter app] --> B[Select platform zone and shift window]
-    B --> C[Risk engine calculates weekly risk score]
-    C --> D[Recommended weekly plan is generated]
-    D --> E[Policy is activated]
-
-    E --> F[Trigger engine monitors disruption feeds]
-    F --> G{Threshold crossed in insured zone?}
-
-    G -- No --> F
-    G -- Yes --> H[Eligible riders are shortlisted]
-
-    H --> I[Eligibility checks]
-    I --> J[Fraud and anti-spoofing checks]
-    J --> K{Claim confidence level}
-
-    K -- Low risk --> L[Auto-create claim]
-    K -- Medium risk --> M[Soft review]
-    K -- High risk --> N[Admin review]
-
-    L --> O[Calculate payout from active weekly plan]
+    A["👤 Rider Signs Up"] --> B["Select Zone & Shift Window"]
+    B --> C["System Calculates Risk Score"]
+    C --> D["Rider Sees Recommended Plan"]
+    D --> E["✅ Policy Activated"]
+    E --> F["System Monitors Disruption Feeds"]
+    F --> G{Threshold Crossed in Zone?}
+    G -->|No| F
+    G -->|Yes| H["Shortlist Eligible Riders"]
+    H --> I["Run Eligibility Checks"]
+    I --> J["Run Fraud Checks"]
+    J --> K{Confidence Level?}
+    K -->|Low Risk| L["Auto-Approve Claim"]
+    K -->|Medium Risk| M["Soft Review"]
+    K -->|High Risk| N["Admin Review"]
+    L --> O["Calculate Payout"]
     M --> O
     N --> O
+    O --> P["Simulate & Update Dashboard"]
+    P --> Q["💰 Rider Receives Payout"]
+```
 
-    O --> P[Simulate payout]
-    P --> Q[Update rider dashboard]
-    P --> R[Update admin dashboard]
 
----
 
-## Optimized onboarding
+## Optimized Onboarding
 
-The brief expects optimized onboarding, so we designed it to be lightweight and rider-friendly. A delivery rider should be able to go from sign-up to weekly protection without a long, form-heavy workflow.
+The app gets riders from sign-up to active protection **in minutes**, not forms.
 
-### Onboarding flow
-- mobile number authentication
-- rider profile setup
-- platform selection
-- insured zone selection
-- shift window selection
-- recommended weekly plan display
-- policy activation
-
-This is important because the product is built for users who already manage work through their phones and often interact between shifts, not at a desktop.
+1. Mobile number authentication
+2. Rider profile setup
+3. Platform selection (Swiggy/Zomato)
+4. Insured zone selection (geo-picked on map)
+5. Shift window selection (when they usually work)
+6. Recommended plan display (zone-based risk)
+7. Policy activation
 
 ---
 
-## Weekly premium model
+## Weekly Pricing Model
 
-The pricing model is intentionally weekly because that matches how the target user thinks and earns. Food delivery riders think in weekly cash flow, not annual policy cycles. The hackathon brief also makes weekly pricing a hard requirement.
+**Why weekly?**  
+Riders think in weekly cash flow, not annual policies. Matches how they earn.
 
-Param Setu uses a **weekly micro-premium model** with a simple base plan and a risk adjustment layer.
+### Base Plans
 
-### Base plans
+| Plan | Week | Daily Coverage |
+|------|-----:|-----:|
+| **Basic** | ₹19 | ₹250 |
+| **Standard** | ₹29 | ₹400 |
+| **Plus** | ₹45 | ₹600 |
 
-| Plan | Weekly Premium | Daily Protection |
-|---|---:|---:|
-| Basic | ₹19/week | up to ₹250/day |
-| Standard | ₹29/week | up to ₹400/day |
-| Plus | ₹45/week | up to ₹600/day |
+*Prototype pricing — not final actuarial.*
 
-These are product-facing prototype bands, not final actuarial prices.
+### Risk Adjustment
 
-### How pricing is adjusted
-
-The final premium is not flat across the city. A rider working in a lower-risk zone should not pay the same as a rider operating in a flood-prone or heat-heavy zone.
-
-Risk scoring uses:
-- operating zone
-- rainfall severity history
-- flood / waterlogging exposure
-- heat exposure
+Final premium depends on the rider's actual zone exposure:
+- Operating zone (flood-prone, heat-heavy, etc.)
+- Rainfall history
+- Heat exposure
 - AQI severity
-- disruption frequency
-- shift timing
+- Disruption frequency
+- Shift timing
 
-This gives us **hyperlocal weekly pricing**, which is more realistic and more defensible than one city-wide flat premium.
-
-### Why this works
-The model is designed to stay:
-- affordable
-- explainable
-- adaptable
-- realistic for gig workers
+**Result:** Hyperlocal weekly pricing. A rider in a low-risk zone pays less than one in a flood-prone area. More fair, more defensible.
 
 ---
 
-## Parametric triggers
+## Disruption Triggers
 
-The product only works if the triggers are measurable and believable. We are not building a vague “claim when something bad happens” flow. We are defining a small set of external conditions that directly affect a rider’s ability to earn.
+**Specific, measurable conditions** that directly affect rider income.
 
-### Trigger set
+| Trigger | Threshold |
+|---------|-----------|
+| **Heavy Rain** | >80mm/6hrs or >120mm/24hrs |
+| **Flood** | Severity=HIGH or >30% roads inaccessible |
+| **Extreme Heat** | Heat index >45°C or temp >40°C for 3h+ |
+| **Air Pollution** | AQI >400 for 3h+ |
+| **Access Block** | Closure flag=TRUE or mobility below threshold |
 
-#### 1. Heavy rain
-Used when rainfall crosses a threshold in the rider’s operating zone.
+### Claim Eligibility
 
-**Prototype threshold**
-- rainfall > 80 mm within 6 hours, or
-- rainfall > 120 mm within 24 hours
-
-#### 2. Flood / waterlogging
-Used when road conditions make movement impractical.
-
-**Prototype threshold**
-- flood / waterlogging severity flag = high, or
-- more than 30% of mapped delivery roads in the zone are inaccessible
-
-#### 3. Extreme heat
-Used when sustained outdoor work becomes unsafe.
-
-**Prototype threshold**
-- heat index > 45°C, or
-- temperature > 40°C for 3 consecutive hours during an active shift window
-
-#### 4. Severe air pollution
-Used when prolonged outdoor work becomes risky.
-
-**Prototype threshold**
-- AQI > 400 for 3 consecutive hours
-
-#### 5. Access restriction / mobility disruption
-Used when the rider’s area is affected by closure, curfew, or severe traffic blockage.
-
-**Prototype threshold**
-- zone closure / restriction / curfew flag = true, or
-- average route mobility drops below the defined disruption threshold for a sustained window
-
-### Trigger logic
-A claim becomes eligible only when:
-- the threshold is crossed
-- the rider has an active policy
-- the disruption zone matches the insured zone
-- the rider is active or available during the affected shift window
-- the fraud score is acceptable
+- Threshold crossed  
+- Rider on active policy  
+- Disruption zone matches insured zone  
+- Rider active during affected shift  
+- Fraud checks pass
 
 ---
 
-## Payout logic
+## Payout Logic
 
-The payout system is designed to stay simple and directly tied to the weekly plan.
+**Simple rule:** Rider gets the daily coverage amount tied to their active plan.
 
-### Prototype payout amounts
-- Basic: up to ₹250/day
-- Standard: up to ₹400/day
-- Plus: up to ₹600/day
+| Plan | Daily Payout |
+|------|-----:|
+| Basic | ₹250 |
+| Standard | ₹400 |
+| Plus | ₹600 |
 
-### How payout is calculated
-A payout is triggered only when:
-- a valid parametric event threshold is crossed
-- the rider has an active weekly policy
-- the rider’s insured zone matches the disruption zone
-- the rider is marked active during the affected shift window
-- fraud checks pass
+**Anti-gaming rules:**
+- 1 payout per disruption window per rider
+- No duplicate payouts for same zone + event window
+- Capped by active plan limits
 
-### Prototype payout rules
-- the rider receives the daily protection amount tied to the active plan
-- only one payout is issued per disruption window per rider
-- duplicate payouts for the same rider, same zone, and same event window are blocked
-- payout simulation is capped by the rider’s active weekly plan rules
+---
+## Sample Scenario: How Sujeet Receives a Payout
+
+**Setup:**  
+Sujeet → Standard plan (₹29/week) → Insured zone: Chennai
+
+**The Day:**  
+Rainfall hits 85mm in 4 hours → Sujeet is active (evening shift) → Zone matches → Fraud checks pass
+
+**What happens:**  
+- Automatic claim created  
+- ₹400 payout simulated  
+- Payout shows in app within seconds
+
+**End-to-End:** Trigger detected → Zone verified → Rider confirmed active → Fraud checks passed → Claim auto-created → Payout calculated and simulated
 
 ---
 
-## Sample claim scenario
+## AI / ML Integration
 
-Sujeet is on the **Standard plan** and has insured his Chennai delivery zone.
+**No decoration.** AI is used only where it changes product decision-making.
 
-- rainfall in Sujeet’s zone crosses **80 mm in 6 hours**
-- Sujeet is marked active during the evening shift
-- the zone matches his insured area
-- the disruption window is valid
-- fraud and activity checks pass
+### 1. Risk Scoring
+**Input:** Zone history, rainfall, heat, AQI, disruption frequency, shift patterns  
+**Output:** Weekly risk score → Recommended plan → Premium adjustment
 
-The system automatically creates a claim and simulates a payout of **up to ₹400 for that covered disruption day**.
+### 2. Fraud Detection
+**Input:** GPS location, app activity, claim frequency, device trust, movement patterns  
+**Output:** Fraud confidence score → Auto-approve | Soft review | Admin flag
 
-This demonstrates the intended end-to-end flow:  
-**trigger → zone match → eligibility → fraud check → auto-claim → payout simulation**
+### 3. Predictive Insights (Admin)
+**Input:** Historical claims, zone patterns, seasonal trends  
+**Output:** Next-week risk forecast → Exposure concentration → Claim pressure alerts
 
----
-
-## Where AI/ML fits
-
-We did not want AI to sit in the README as decoration. In Param Setu, it is used where it actually changes product behavior.
-
-### 1. Risk-based premium calculation
-Inputs:
-- historical rainfall
-- flood exposure
-- AQI severity
-- heat intensity
-- zone-level disruption frequency
-- rider shift pattern
-
-Outputs:
-- risk score
-- recommended weekly premium band
-- suggested protection band
-
-### 2. Fraud detection
-Used to score suspicious claims through signals such as:
-- GPS mismatch with insured zone
-- duplicate claims for the same disruption window
-- abnormal claim frequency
-- event mismatch
-- inconsistent rider activity patterns
-
-### 3. Predictive admin insights
-Used to estimate:
-- which zones may become high-risk next week
-- where claim pressure may rise
-- where payout burden is clustering
-
-### Why the AI is practical
-We are keeping the models explainable. For this use case, interpretable risk and fraud logic is more valuable than a complex model that is difficult to trust.
+**Philosophy:** Explainable models > black-box models. Riders and admins need to trust the logic.
 
 ---
 
-## Adversarial Defense & Anti-Spoofing Strategy
+## Fraud Prevention
 
-Param Setu is designed with the assumption that raw GPS can be spoofed. A location ping alone is never treated as proof of presence inside a disruption zone. Instead, the platform uses **multi-signal adversarial validation** to decide whether a claim looks like a genuinely disrupted rider or a coordinated spoofing attempt.
+**Core Assumption:** GPS alone won't work. Location can be spoofed.
 
-### 1. The Differentiation
+**Better Question:** "Does this rider's full behavior look like someone genuinely disrupted?"
 
-The system does not ask only, “Is this rider’s GPS inside the affected zone?”  
-It asks, **“Does this rider’s full behavior look like an actually active delivery partner who got disrupted?”**
+### What We Check
 
-To answer that, the fraud layer compares:
-- claimed location
-- recent movement continuity
-- app session activity
-- shift check-in / check-out behavior
-- zone consistency over time
-- event timing consistency
-- device and network trust signals
-- cluster-level coordination patterns across multiple riders
+| Signal | Genuine | Spoofer |
+|--------|---------|---------|
+| Location | Consistent zone history | Sudden high-payout jumps |
+| Activity | Active during disruption | Weak session evidence |
+| Movement | Route continuity | Impossible travel |
+| Timing | Overlaps real events | Mismatched timing |
+| Device | Consistent device/IP | Emulator flags, IP switching |
+| Claims | Normal frequency | Synchronized across accounts |
 
-A genuinely stranded rider usually shows a believable pattern: active before the disruption, normal zone history, consistent session behavior, and timing that matches the actual event window.
+### Decision Process
 
-A spoofing actor usually looks different: sudden location jumps, impossible movement, repeated presence in high-payout zones, weak activity evidence, suspicious device/network patterns, or synchronized claim behavior across many accounts.
+**Low Risk** → Auto-approve  
+**Medium Risk** → Soft review (rider can confirm in app)  
+**High Risk** → Admin review (fraud signal)
 
-### 2. The Data
-
-To detect coordinated fraud, Param Setu looks beyond GPS and analyzes:
-
-**Rider activity signals**
-- declared shift window
-- app check-in / availability state
-- app foreground/background activity near the disruption window
-- session duration before and during the event
-- policy activation timing versus event timing
-- recent operating-zone history
-
-**Movement and spatial consistency signals**
-- route continuity over time
-- impossible travel jumps
-- stationary-at-home patterns while claiming field presence
-- repeated appearances in multiple high-risk zones
-- mismatch between claimed zone and normal operating pattern
-
-**Device and network trust signals**
-- device fingerprint consistency
-- emulator / mock-location risk indicators
-- repeated claims from linked device patterns
-- abnormal IP or network switching during event windows
-- suspicious clustering of accounts across similar devices or networks
-
-**Event-consistency signals**
-- whether the rider was active before the disruption began
-- whether rider availability overlaps the affected shift window
-- whether claim timing matches real external event progression
-- whether rider behavior changes in a believable way during disruption
-
-**Coordinated-ring signals**
-- abnormal claim concentration in the same time window
-- synchronized claim attempts from clustered groups
-- repeated behavioral or device/network similarities across accounts
-- abnormal spikes in new policy activations just before a trigger event
-
-The goal is to detect not just suspicious riders, but suspicious **patterns across riders**.
-
-### 3. The UX Balance
-
-An anti-fraud system should not punish honest workers just because bad weather caused poor connectivity. Param Setu therefore uses a **three-band claim handling model**:
-
-**Low-risk claims**  
-Automatically approved when policy, zone, activity, and fraud signals are consistent.
-
-**Medium-risk claims**  
-Placed into **soft review**, not rejected immediately. The system falls back to:
-- last trusted zone presence
-- recent shift check-in state
-- app session continuity
-- event timing consistency
-- rider confirmation inside the app
-
-This protects honest riders during genuine network drops.
-
-**High-risk claims**  
-Held for admin review when strong spoofing indicators or coordinated fraud patterns are detected.
-
-### Defense principle
-
-The core rule is simple:
-
-> **No single rider-controlled signal should be enough to unlock payout.**
-
-That means GPS alone is not enough, manual declaration alone is not enough, and app-open state alone is not enough. Payout confidence comes from agreement across behavior, time, zone, device, and event consistency.
-
-This makes Param Setu more resilient against both individual spoofers and organized fraud rings without making the product unfair for honest riders.
+**Core Principle:** No single signal unlocks payout. Confidence comes from agreement across all checks.
 
 ---
 
-## Why mobile, not web
+## Why Mobile-First
 
-We chose a **cross-platform mobile app** because that is where this product actually belongs.
+Riders live on their phones. Building for desktop would be artificial.
 
-Food delivery riders already work through their phones. Their navigation, shift flow, communication, and earnings tracking all happen on mobile. Asking them to manage income protection from a desktop-first product would be unnatural.
+**Why Mobile:**
+- Real-time access during live shifts
+- Location validation is natural on mobile
+- Alerts & payouts fit the app experience
+- Matches how riders already use tools
 
-### Why mobile is the right decision
-- riders need access during live work shifts
-- location-aware validation is easier on mobile
-- alerts and payout updates fit mobile better
-- onboarding is faster in an app flow
-- it matches how gig workers already use digital tools
-
-### Why cross-platform
-We are building with **Flutter** so we can move quickly with one codebase across Android and iOS.
-
-The rider experience is mobile-first.  
-The admin view can be delivered through a lightweight dashboard.
+**Building with Flutter** for one codebase → Android + iOS.
 
 ---
 
-## Tech stack
+## Tech Stack
 
-### Mobile app
-- Flutter
-- Dart
-- Riverpod
-- GoRouter
-- Supabase Flutter SDK
+**Mobile:** Flutter (Dart) + Riverpod + GoRouter + Supabase SDK  
+**Backend:** FastAPI (Python) + background jobs  
+**Database:** Supabase (PostgreSQL) + Auth + RLS + Realtime  
+**Intelligence:** Python + Pandas + scikit-learn + anomaly detection  
+**Integrations:** Weather API | AQI API | Mobility feed | GPS validation
 
-### Backend
-- FastAPI
-- Python
-- background jobs for trigger monitoring
-- REST APIs
-
-### Database / backend platform
-- Supabase
-- PostgreSQL
-- Supabase Auth
-- Row Level Security
-- Realtime subscriptions
-
-### AI / ML
-- Python
-- Pandas
-- scikit-learn
-- anomaly detection for fraud scoring
-
-### Integration capabilities
-- weather API
-- AQI API
-- mobility / access disruption feed
-- payout simulation layer
-- GPS / location validation
-- rider activity validation layer
-- simulated delivery platform activity signals
-
----
-
-```markdown
-## High-level architecture
+### Architecture
 
 ```mermaid
 flowchart LR
-    A[Flutter Mobile App] --> B[FastAPI Backend]
-
-    B --> C[Supabase Auth]
-    B --> D[(Supabase PostgreSQL)]
-    B --> E[Supabase Realtime]
-
-    B --> F[Risk Engine]
-    B --> G[Fraud Engine]
-    B --> H[Trigger Engine]
-    B --> I[Payout Simulation Service]
-
-    H --> J[Weather API]
-    H --> K[AQI API]
-    H --> L[Mobility / Access Disruption Feed]
-
-    G --> M[GPS / Location Validation]
-    G --> N[Device and Network Trust Signals]
-    G --> O[Rider Activity Validation]
-
-    F --> D
-    G --> D
-    H --> D
-    I --> D
+    A[Flutter Mobile App] -->|REST| B[FastAPI Backend]
+    B --> C[Risk Scoring Engine]
+    B --> D[Fraud Detection Engine]
+    B --> E[Trigger Monitoring Engine]
+    B --> F[Payout Simulation Service]
+    B --> G[Supabase Auth]
+    C --> H[(PostgreSQL)]
+    D --> H
+    E --> H
+    F --> H
+    G --> H
+    B --> I[Realtime Subscriptions]
+    E --> J[Weather API]
+    E --> K[AQI API]
+    E --> L[Disruption Feed]
+    A -->|Location & Activity| D
+```
 
 ---
 
-## Dashboard metrics
+## Dashboards
 
-### Worker dashboard
+### Rider Dashboard
+Real-time view of protection status and claims.
 
-The rider-facing app is designed to show:
+**Key Metrics:**
+- Active weekly plan (premium, daily protection limit)
+- Insured operating zone & shift window
+- Risk score for current zone
+- Live claims triggered this week (date, reason, status)
+- Payouts received & pending approval
+- Total earnings protected this week
 
-- active weekly plan
-- insured operating zone
-- premium paid this week
-- daily protection amount
-- claims triggered
-- claim reason
-- payout status
-- payout history
-- total earnings protected this week
+**Recent Activity:**
+- Claims by date & disruption type
+- Zone coverage validation (GPS last verified)
+- Policy activation & renewal history
 
-### Admin dashboard
+### Admin Dashboard
+Operational visibility and fraud oversight.
 
-The admin side is designed to show:
+**Zone Analytics:**
+- Active policies by zone
+- Risk score distribution (low/medium/high)
+- Disruption frequency by zone & trigger type
+- Premium revenue & payout exposure by area
 
-- active policies by zone
-- zone-wise risk score distribution
-- triggers fired by type
-- claims triggered by zone
-- suspicious / flagged claims
-- payout totals by plan
-- exposure concentration by area
-- next-week risk outlook
-- fraud review queue
+**Claims & Risk:**
+- Triggers fired (hourly, daily summary)
+- Claims auto-created vs. in review
+- Flagged & suspicious claims (admin queue)
+- Fraud confidence score trends
 
-This keeps the dashboard aligned with both worker utility and insurer-side operational visibility.
-
----
-
-## Development plan
-
-We are treating the build in the same order the product needs to work.
-
-### Phase 1 — Foundation
-
-- lock persona and product scope
-- define pricing model
-- define trigger framework
-- design app flow
-- define backend services
-- document architecture and README
-
-### Phase 2 — Core product
-
-- build rider onboarding flow
-- build policy creation flow
-- connect Supabase auth and database
-- implement weekly premium calculation
-- implement trigger monitoring service
-- create automated claim flow
-
-### Phase 3 — Intelligence and polish
-
-- add fraud scoring
-- add predictive admin metrics
-- simulate payout workflow
-- improve rider claim visibility
-- prepare demo scenario and final presentation
+**Business Metrics:**
+- Weekly payout totals by plan
+- Exposure concentration (zone clusters)
+- Next-week risk forecast
+- Claim approval rates by confidence band
 
 ---
 
-## Closing note
+## Development Phases
+
+**Phase 1 — Foundation**  
+Scope, pricing, triggers, architecture, README, demo flow
+
+**Phase 2 — Core Product**  
+Onboarding, policies, Supabase integration, risk scoring, trigger engine, auto-claims
+
+**Phase 3 — Intelligence & Polish**  
+Fraud detection, admin insights, payout simulation, claim visibility, final demo
+
+---
+
+## Summary
 
 Param Setu is our attempt to build something narrow, honest, and actually usable.
 
