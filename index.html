@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Param Setu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app-container">
+        
+        <!-- Screen 1: Welcome -->
+        <section id="screen-home" class="screen active">
+            <header class="app-header">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 16L16 12L12 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h1>Param Setu</h1>
+                </div>
+            </header>
+            
+            <div class="content-wrapper scrollable">
+                <div class="greeting">
+                    <span class="greeting-text">Hi, Sujeet 👋</span>
+                </div>
+                
+                <div class="hero-section">
+                    <h2 class="hero-title">Protect your income when disruption hits</h2>
+                    <p class="hero-text">Heavy rain, flooding, extreme heat, or severe pollution can stop you from working. We help make up for your lost earnings during those tough days.</p>
+                </div>
+
+                <div class="info-card soft-card">
+                    <div class="icon-wrapper">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8 14S9.5 16 12 16S16 14 16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9 9H9.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M15 9H15.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="info-content">
+                        <h3>Built for riders like you</h3>
+                        <p>Simple daily protection for your delivery zones. No complicated paperwork.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bottom-action vertical-actions">
+                <button class="btn-primary" onclick="navigateTo('screen-plans')">
+                    See my plans
+                </button>
+                <button class="btn-secondary" onclick="navigateTo('screen-claim')">
+                    How it works
+                </button>
+            </div>
+        </section>
+
+        <!-- Screen 2: Plans -->
+        <section id="screen-plans" class="screen">
+            <header class="app-header align-center">
+                <button class="back-btn" onclick="navigateTo('screen-home')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <h1 class="header-title">Plans</h1>
+                <div class="spacer"></div>
+            </header>
+
+            <div class="content-wrapper scrollable">
+                <div class="page-header">
+                    <h2>Choose your weekly protection</h2>
+                    <p>Pick a simple weekly plan based on your delivery area and income needs.</p>
+                </div>
+
+                <div class="plans-container">
+                    <!-- Basic Plan -->
+                    <div class="plan-card" onclick="selectPlan(this)">
+                        <div class="plan-header">
+                            <h3>Basic</h3>
+                            <div class="price">
+                                <span>₹19</span><span class="period">/ week</span>
+                            </div>
+                        </div>
+                        <div class="plan-body">
+                            <div class="feature">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22 11.08V12C21.9988 14.1564 21.3001 16.2547 20.0093 17.9818C18.7185 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M22 4L12 14.01L9 11.01" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>Up to <strong>₹250 / day</strong> protection</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Standard Plan -->
+                    <div class="plan-card active" onclick="selectPlan(this)">
+                        <div class="plan-header">
+                            <h3>Standard</h3>
+                            <div class="price">
+                                <span>₹29</span><span class="period">/ week</span>
+                            </div>
+                        </div>
+                        <div class="plan-body">
+                            <div class="feature">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22 11.08V12C21.9988 14.1564 21.3001 16.2547 20.0093 17.9818C18.7185 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M22 4L12 14.01L9 11.01" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>Up to <strong>₹400 / day</strong> protection</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Plus Plan -->
+                    <div class="plan-card" onclick="selectPlan(this)">
+                        <div class="plan-header">
+                            <h3>Plus</h3>
+                            <div class="price">
+                                <span>₹45</span><span class="period">/ week</span>
+                            </div>
+                        </div>
+                        <div class="plan-body">
+                            <div class="feature">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22 11.08V12C21.9988 14.1564 21.3001 16.2547 20.0093 17.9818C18.7185 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M22 4L12 14.01L9 11.01" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>Up to <strong>₹600 / day</strong> protection</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bottom-action">
+                <button class="btn-primary" onclick="navigateTo('screen-claim')">
+                    See how claims work
+                </button>
+            </div>
+        </section>
+
+        <!-- Screen 3: Claim Example -->
+        <section id="screen-claim" class="screen">
+            <header class="app-header align-center">
+                <button class="back-btn" onclick="navigateTo('screen-plans')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <h1 class="header-title">How protection works</h1>
+                <div class="spacer"></div>
+            </header>
+
+            <div class="content-wrapper scrollable">
+                <div class="alert-card slide-in">
+                    <div class="alert-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21.5 12C21.5 13.916 20.9022 15.7891 19.8 17.3486C18.6978 18.9082 17.1517 20.0718 15.3854 20.669C13.619 21.2662 11.7271 21.2662 9.96078 20.669C8.19446 20.0718 6.64831 18.9082 5.54611 17.3486" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16 13L12 17L8 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 17V3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M4 12V3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M20 12V3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="alert-content">
+                        <h3>Heavy rain detected in your zone</h3>
+                        <p>Your insured zone crossed the rainfall threshold during your active shift window.</p>
+                    </div>
+                </div>
+
+                <div class="status-board soft-card">
+                    <div class="status-row">
+                        <span class="label">Policy status</span>
+                        <span class="value status-active"><span class="dot"></span> Active</span>
+                    </div>
+                    <div class="status-row">
+                        <span class="label">Plan</span>
+                        <span class="value">Standard</span>
+                    </div>
+                    <div class="status-row">
+                        <span class="label">Claim status</span>
+                        <span class="value highlight">Created automatically</span>
+                    </div>
+                    <div class="status-row">
+                        <span class="label">Payout status</span>
+                        <span class="value">Simulated</span>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="status-row grand-total">
+                        <span class="label">Protected amount</span>
+                        <span class="value amount">₹400</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bottom-action">
+                <button class="btn-primary" onclick="navigateTo('screen-home')">
+                    Back to home
+                </button>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
