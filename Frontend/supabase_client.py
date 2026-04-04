@@ -5,28 +5,31 @@ from supabase import create_client
 
 
 def _supabase_credentials():
-    s_url = s_key = None
+    # Render / Docker / shell: set in Environment (recommended for deployed Streamlit)
+    url = os.getenv("SUPABASE_URL")
+    key = os.getenv("SUPABASE_KEY")
+    if url and key:
+        return url, key
+
     try:
-        s_url = st.secrets["SUPABASE_URL"]
-        s_key = st.secrets["SUPABASE_KEY"]
+        url = st.secrets["SUPABASE_URL"]
+        key = st.secrets["SUPABASE_KEY"]
     except FileNotFoundError:
-        pass
+        url = key = None
     except KeyError as e:
         raise RuntimeError(
             f"Missing secret {e!s}. Add SUPABASE_URL and SUPABASE_KEY to "
-            ".streamlit/secrets.toml (local) or Streamlit Cloud → Settings → Secrets."
+            ".streamlit/secrets.toml (local), Streamlit Cloud → Secrets, or Render → Environment."
         ) from e
 
-    url = os.environ.get("SUPABASE_URL") or s_url
-    key = os.environ.get("SUPABASE_KEY") or s_key
     if url and key:
         return url, key
 
     raise RuntimeError(
-        "No Supabase credentials found. Do one of the following:\n"
-        "• Local: copy .streamlit/secrets.toml.example to .streamlit/secrets.toml and add your keys\n"
-        "• Local: export SUPABASE_URL and SUPABASE_KEY in your shell\n"
-        "• Streamlit Cloud: set the same keys under App settings → Secrets"
+        "No Supabase credentials found. Set **SUPABASE_URL** and **SUPABASE_KEY**:\n"
+        "• **Render:** Web Service → Environment → add both variables (no quotes needed)\n"
+        "• **Local:** `.streamlit/secrets.toml` or `export SUPABASE_URL=...` / `SUPABASE_KEY=...`\n"
+        "• **Streamlit Cloud:** App → Settings → Secrets"
     )
 
 
