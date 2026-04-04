@@ -174,7 +174,7 @@ if st.session_state.logged_in:
 
         st.stop()
 
-    page = st.sidebar.radio("Navigate", ["Dashboard", "My Policy", "Claims", "Admin"])
+    page = st.sidebar.radio("Navigate", ["Dashboard", "My Policy", "Claims"])
 
     claims = fetch_claims(user_mobile)
 
@@ -306,59 +306,6 @@ if st.session_state.logged_in:
 """
                 )
                 st.divider()
-
-    elif page == "Admin":
-        st.title("🧑‍💻 Admin Dashboard")
-        st.caption("Monitor users, policies, claims & payouts in real-time")
-
-        st.divider()
-
-        # ---- FETCH DATA ----
-        users_res = supabase.table("users").select("*").execute()
-        policies_res = supabase.table("policies").select("*").execute()
-        claims_res = supabase.table("claims").select("*").execute()
-
-        users = users_res.data or []
-        policies = policies_res.data or []
-        claims = claims_res.data or []
-
-        st.markdown("### 📊 Key Metrics")
-
-        col1, col2, col3, col4 = st.columns(4)
-
-        col1.metric("👥 Users", len(users))
-        col2.metric("📄 Policies", len(policies))
-        col3.metric("🧾 Claims", len(claims))
-
-        total_payout = sum(int(c["payout_amount"]) for c in claims) if claims else 0
-        col4.metric("💰 Total Payout", f"₹{total_payout}")
-
-        st.divider()
-
-        st.markdown("### 👥 Users Overview")
-
-        if users:
-            st.dataframe(users, use_container_width=True)
-        else:
-            st.info("No users registered yet")
-
-        st.divider()
-
-        st.markdown("### 📄 Active Policies")
-
-        if policies:
-            st.dataframe(policies, use_container_width=True)
-        else:
-            st.info("No policies created yet")
-
-        st.divider()
-
-        st.markdown("### 🧾 Claims Activity")
-
-        if claims:
-            st.dataframe(claims, use_container_width=True)
-        else:
-            st.info("No claims triggered yet")
 
     st.stop()
 
