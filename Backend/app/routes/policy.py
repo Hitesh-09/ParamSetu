@@ -40,15 +40,15 @@ def create_policy(policy: dict):
     return response.data
 
 
+# List all policies (must be registered before /{user_id} so "list" is not captured as an id)
+@router.get("/")
+def get_all_policies():
+    response = supabase.table("policies").select("*").execute()
+    return response.data
+
+
 # Get policies for a user
 @router.get("/{user_id}")
 def get_user_policies(user_id: str):
     response = supabase.table("policies").select("*").eq("user_id", user_id).execute()
-    return response.data
-
-
-# Get all policies
-@router.get("/")
-def get_all_policies():
-    response = supabase.table("policies").select("*").execute()
     return response.data

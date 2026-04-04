@@ -1,16 +1,50 @@
 import streamlit as st
-import requests
 
-BASE_URL = "http://127.0.0.1:8000"
+from supabase_client import supabase
 
 st.set_page_config(page_title="Admin Dashboard", layout="wide")
 
 st.title("🧑‍💼 Admin Dashboard")
 
+st.caption(
+    "Loads users, policies, and claims **directly from Supabase** (same source as the rider app). "
+    "You do **not** need the FastAPI server running for this dashboard."
+)
+
+
+@st.cache_data(ttl=30)
+def load_users():
+    return supabase.table("users").select("*").execute().data or []
+
+
+@st.cache_data(ttl=30)
+def load_policies():
+    return supabase.table("policies").select("*").execute().data or []
+
+
+@st.cache_data(ttl=30)
+def load_claims():
+    return supabase.table("claims").select("*").execute().data or []
+
+
+def safe_load(label: str, loader):
+    try:
+        return loader()
+    except Exception as e:
+        st.error(f"Could not load **{label}** from Supabase: `{e}`")
+        return []
+
+
+if st.sidebar.button("Refresh data"):
+    load_users.clear()
+    load_policies.clear()
+    load_claims.clear()
+    st.rerun()
+
 # ---------------- FETCH DATA ----------------
-users = requests.get(f"{BASE_URL}/user").json()
-policies = requests.get(f"{BASE_URL}/policy").json()
-claims = requests.get(f"{BASE_URL}/claim").json()
+users = safe_load("users", load_users)
+policies = safe_load("policies", load_policies)
+claims = safe_load("claims", load_claims)
 
 # ---------------- METRICS ----------------
 st.subheader("📊 System Overview")
@@ -48,11 +82,12 @@ st.subheader("💰 Claims")
 
 if claims:
     for claim in claims:
+        user_ref = claim.get("user_mobile") or claim.get("user_id") or "—"
         st.markdown(f"""
-        **User ID:** {claim['user_id']}  
-        **Event:** {claim['event_type']}  
-        **Payout:** ₹{claim['payout_amount']}  
-        **Status:** {claim['status']}  
+        **User:** {user_ref}  
+        **Event:** {claim.get('event_type', '—')}  
+        **Payout:** ₹{claim.get('payout_amount', '—')}  
+        **Status:** {claim.get('status', '—')}  
         ---
         """)
 else:

@@ -77,7 +77,7 @@ if st.session_state.logged_in:
                     "user_mobile": st.session_state.user_mobile,
                     "premium": plan_data["premium"],
                     "coverage_per_day": plan_data["coverage"],
-                    "risk_level": "low",
+                    "risk_level": "medium",
                     "active": True
                 }).execute()
                 
@@ -129,7 +129,7 @@ if st.session_state.logged_in:
                     "user_mobile": st.session_state.user_mobile,
                     "premium": plan_data["premium"],
                     "coverage_per_day": plan_data["coverage"],
-                    "risk_level": "high",
+                    "risk_level": "medium",
                     "active": True
                 }).execute()
                 
