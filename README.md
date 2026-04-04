@@ -1,132 +1,177 @@
-🚀 Param Setu
-Automated Parametric Insurance for Delivery Workers
+# 🚀 Param Setu  
+### Automated Parametric Insurance for Delivery Workers  
 
-Instant payouts. Zero claims. Powered by real-world data.
+> **Instant payouts. Zero claims. Powered by real-world data.**
 
+![Python](https://img.shields.io/badge/Python-3.9-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green)
+![Supabase](https://img.shields.io/badge/Database-Supabase-purple)
+![Streamlit](https://img.shields.io/badge/UI-Streamlit-orange)
 
+---
 
+## 🌟 Overview
 
+Param Setu is a **next-generation parametric insurance platform** designed to protect gig and delivery workers from income disruptions caused by environmental risks such as rain, heatwaves, and air pollution.
 
+Unlike traditional insurance systems that rely on manual claim filing and lengthy verification processes, Param Setu leverages **real-time data, automated triggers, and intelligent risk pricing** to deliver **instant payouts without human intervention**.
 
+---
 
-
-🌟 Overview
-
-Param Setu is a next-generation parametric insurance platform designed to protect gig and delivery workers from income disruptions caused by environmental risks such as rain, heatwaves, and air pollution.
-
-Unlike traditional insurance systems that rely on manual claim filing and lengthy verification processes, Param Setu leverages real-time data, automated triggers, and intelligent risk pricing to deliver instant payouts without human intervention.
-
-🎯 Problem Statement
+## 🎯 Problem Statement
 
 Delivery workers are highly vulnerable to:
 
-🌧 Heavy rainfall
-🌡 Extreme heat conditions
-🌫 Poor air quality
+- 🌧 Heavy rainfall  
+- 🌡 Extreme heat conditions  
+- 🌫 Poor air quality  
 
 These conditions directly impact their daily earnings.
 
 However, existing insurance solutions are:
 
-❌ Manual and slow
-❌ Claim-heavy and complex
-❌ Not designed for gig workers
-💡 Solution
+- ❌ Manual and slow  
+- ❌ Claim-heavy and complex  
+- ❌ Not designed for gig workers  
 
-Param Setu introduces a fully automated parametric insurance system where:
+---
 
-User → Policy → Risk Engine → Event Detection → Automatic Claim → Instant Payout
+## 💡 Solution
 
-✔ No claim filing
-✔ No manual verification
-✔ Instant financial protection
+Param Setu introduces a **fully automated parametric insurance system** where:
 
-🔥 Key Features
-⚡ Automated Event Engine
-Continuously monitors real-world conditions
-Uses OpenWeather APIs for:
-Rainfall
-Temperature
-Air Quality (AQI)
-Runs in the background to detect trigger events
-💰 Instant Parametric Claims
-Claims are triggered automatically
-Fixed payout per event
-No paperwork or delays
-🌍 Multi-Trigger Support
-🌧 Rain-based triggers
-🌡 Heatwave triggers
-🌫 Pollution (AQI) triggers
-🧠 AI-Based Premium Calculation
-Dynamic pricing using a rule-based risk engine
-Factors:
-Rainfall
-Temperature
-AQI
-Outputs:
-Risk Level (Low / Medium / High)
-Weekly Premium
-🛡 Fraud Prevention System
-Prevents duplicate claims
-Uses trusted external APIs for validation
-Fully automated system eliminates manual manipulation
-📱 Rider Dashboard (User App)
-Simple login/register flow
-Displays:
-Premium
-Risk level
-Daily coverage
-Shows automatic payouts in real-time
-🧑‍💼 Admin Dashboard
-Monitor users, policies, and claims
-Track system activity
-View triggered events and payouts
-🧱 System Architecture
+✔ No claim filing  
+✔ No manual verification  
+✔ Instant financial protection  
+
+---
+
+## 🔥 Key Features
+
+### ⚡ Automated Event Engine
+- Continuously monitors real-world conditions  
+- Uses OpenWeather APIs for:
+  - Rainfall  
+  - Temperature  
+  - Air Quality (AQI)  
+- Runs in the background to detect trigger events  
+
+---
+
+### 💰 Instant Parametric Claims
+- Claims are triggered automatically  
+- Fixed payout per event  
+- No paperwork or delays  
+
+---
+
+### 🌍 Multi-Trigger Support
+- 🌧 Rain-based triggers  
+- 🌡 Heatwave triggers  
+- 🌫 Pollution (AQI) triggers  
+
+---
+
+### 🧠 AI-Based Premium Calculation
+- Dynamic pricing using a rule-based risk engine  
+- Factors:
+  - Rainfall  
+  - Temperature  
+  - AQI  
+- Outputs:
+  - Risk Level (Low / Medium / High)  
+  - Weekly Premium  
+
+---
+
+### 🛡 Fraud Prevention System
+- Prevents duplicate claims  
+- Uses trusted external APIs for validation  
+- Fully automated system eliminates manual manipulation  
+
+---
+
+### 📱 Rider Dashboard (User App)
+- Simple login/register flow  
+- Displays:
+  - Premium  
+  - Risk level  
+  - Daily coverage  
+- Shows automatic payouts in real-time  
+
+---
+
+### 🧑‍💼 Admin Dashboard
+- Monitor users, policies, and claims  
+- Track system activity  
+- View triggered events and payouts  
+
+---
+
+## 🧱 System Architecture
+
 User → Policy Creation → Risk Engine → Event Engine → Claim Engine → Database
-🛠️ Tech Stack
-Category	Technology
-Backend	FastAPI (Python)
-Database	Supabase (PostgreSQL)
-Frontend	Streamlit (User + Admin dashboards)
-APIs	OpenWeather (Weather + AQI)
-AI Logic	Rule-based risk engine
-Automation	Background event engine
-Testing	Postman
-Version Control	GitHub
-⚙️ How It Works
-User registers on the platform
-Policy is created with AI-calculated premium
-System continuously monitors environmental data
-If a trigger condition is met:
-Claim is generated automatically
-Payout is credited instantly
-🛡 Policy Logic & Exclusions
-Claims are triggered only when predefined thresholds are met
-No duplicate payouts for the same event
-Coverage is location-based
-Only verified external data sources are used
-🚀 Getting Started
-1️⃣ Clone the repository
+
+
+---
+
+## 🛠️ Tech Stack
+
+| Category | Technology |
+|--------|-----------|
+| Backend | FastAPI (Python) |
+| Database | Supabase (PostgreSQL) |
+| Frontend | Streamlit (User + Admin dashboards) |
+| APIs | OpenWeather (Weather + AQI) |
+| AI Logic | Rule-based risk engine |
+| Automation | Background event engine |
+| Testing | Postman |
+| Version Control | GitHub |
+
+---
+
+## ⚙️ How It Works
+
+1. User registers on the platform  
+2. Policy is created with **AI-calculated premium**  
+3. System continuously monitors environmental data  
+4. If a trigger condition is met:
+   - Claim is generated automatically  
+   - Payout is credited instantly  
+
+---
+
+## 🛡 Policy Logic & Exclusions
+
+- Claims are triggered only when predefined thresholds are met  
+- No duplicate payouts for the same event  
+- Coverage is location-based  
+- Only verified external data sources are used  
+
+---
+
+## 🚀 Getting Started
+
+### 1️⃣ Clone the repository
+
+```bash
 git clone https://github.com/Hitesh-09/ParamSetu.git
 cd ParamSetu
-2️⃣ Setup Backend
+
 cd Backend
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-3️⃣ Configure Environment Variables
-
-Create a .env file inside Backend/:
 
 SUPABASE_URL=your_url
 SUPABASE_KEY=your_key
 WEATHER_API_KEY=your_api_key
-4️⃣ Run Backend
+
 python3 -m uvicorn app.main:app --reload
-5️⃣ Run Rider App (Frontend)
+
 streamlit run frontend/app.py
-6️⃣ Run Admin Dashboard
-streamlit run frontend/admin.py
+```
+
 📊 Demo Flow
 Register a delivery worker
 Create a policy (premium auto-calculated)
