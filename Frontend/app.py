@@ -11,19 +11,50 @@ if "users" not in st.session_state:
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
-if "selected_plan" not in st.session_state:
-    st.session_state.selected_plan = None
-
-if "claims" not in st.session_state:
-    st.session_state.claims = []
-
 if "event_triggered" not in st.session_state:
     st.session_state.event_triggered = False
 
 if "event_history" not in st.session_state:
     st.session_state.event_history = {}
 
+if "event_active" not in st.session_state:
+    st.session_state.event_active = False
+
 EVENT_COOLDOWN = timedelta(minutes=1)  # later this can be increased
+
+
+def _claim_title(event_type: str) -> str:
+    return (event_type or "Event").strip().title()
+
+
+def fetch_latest_policy(user_mobile: str):
+    policy_res = (
+        supabase.table("policies")
+        .select("*")
+        .eq("user_mobile", user_mobile)
+        .order("created_at", desc=True)
+        .limit(1)
+        .execute()
+    )
+    return policy_res.data[0] if policy_res.data else None
+
+
+def fetch_claims(user_mobile: str):
+    claims_res = (
+        supabase.table("claims")
+        .select("*")
+        .eq("user_mobile", user_mobile)
+        .order("created_at", desc=True)
+        .execute()
+    )
+    return claims_res.data or []
+
+
+def plan_label(policy: dict) -> str:
+    key = (policy.get("premium"), policy.get("coverage_per_day"))
+    names = {(20, 200): "Basic", (30, 400): "Standard", (50, 700): "Premium"}
+    return names.get(key, "Your plan")
+
 
 # ---------------- PLANS & DASHBOARD ----------------
 if st.session_state.logged_in:
@@ -39,21 +70,26 @@ if st.session_state.logged_in:
         st.session_state.logged_in = False
         st.rerun()
 
-    page = st.sidebar.radio("Navigate", ["Dashboard", "My Policy", "Claims"])
+    policy = fetch_latest_policy(user_mobile)
+
+    st.sidebar.title("🛵 ParamSetu")
+    st.sidebar.markdown(f"**User:** {user['name']}")
+    st.sidebar.markdown(f"📍 {user['location']}")
+    st.sidebar.markdown(f"🚴 {user['platform']}")
+    st.sidebar.divider()
 
     if st.sidebar.button("Logout"):
-        st.session_state.update({
-            "logged_in": False,
-            "selected_plan": None,
-            "claims": [],
-            "event_triggered": False,
-            "event_active": False
-        })
+        st.session_state.update(
+            {
+                "logged_in": False,
+                "event_triggered": False,
+                "event_active": False,
+            }
+        )
         st.rerun()
 
-    # If no plan selected → show plans first
-    if st.session_state.selected_plan is None:
-
+    # If no policy in DB → only plan picker (no app navigation yet)
+    if policy is None:
         st.title("📦 Choose Your Insurance Plan")
 
         col1, col2, col3 = st.columns(3)
@@ -68,19 +104,19 @@ if st.session_state.logged_in:
                 plan_data = {
                     "name": "Basic",
                     "premium": 20,
-                    "coverage": 200
+                    "coverage": 200,
                 }
-                st.session_state.selected_plan = plan_data
-                
-                # Save to Supabase
-                supabase.table("policies").insert({
-                    "user_mobile": st.session_state.user_mobile,
-                    "premium": plan_data["premium"],
-                    "coverage_per_day": plan_data["coverage"],
-                    "risk_level": "medium",
-                    "active": True
-                }).execute()
-                
+
+                supabase.table("policies").insert(
+                    {
+                        "user_mobile": st.session_state.user_mobile,
+                        "premium": plan_data["premium"],
+                        "coverage_per_day": plan_data["coverage"],
+                        "risk_level": "medium",
+                        "active": True,
+                    }
+                ).execute()
+
                 st.success("Plan selected & saved!")
                 st.rerun()
 
@@ -94,19 +130,19 @@ if st.session_state.logged_in:
                 plan_data = {
                     "name": "Standard",
                     "premium": 30,
-                    "coverage": 400
+                    "coverage": 400,
                 }
-                st.session_state.selected_plan = plan_data
-                
-                # Save to Supabase
-                supabase.table("policies").insert({
-                    "user_mobile": st.session_state.user_mobile,
-                    "premium": plan_data["premium"],
-                    "coverage_per_day": plan_data["coverage"],
-                    "risk_level": "medium",
-                    "active": True
-                }).execute()
-                
+
+                supabase.table("policies").insert(
+                    {
+                        "user_mobile": st.session_state.user_mobile,
+                        "premium": plan_data["premium"],
+                        "coverage_per_day": plan_data["coverage"],
+                        "risk_level": "medium",
+                        "active": True,
+                    }
+                ).execute()
+
                 st.success("Plan selected & saved!")
                 st.rerun()
 
@@ -120,50 +156,60 @@ if st.session_state.logged_in:
                 plan_data = {
                     "name": "Premium",
                     "premium": 50,
-                    "coverage": 700
+                    "coverage": 700,
                 }
-                st.session_state.selected_plan = plan_data
-                
-                # Save to Supabase
-                supabase.table("policies").insert({
-                    "user_mobile": st.session_state.user_mobile,
-                    "premium": plan_data["premium"],
-                    "coverage_per_day": plan_data["coverage"],
-                    "risk_level": "medium",
-                    "active": True
-                }).execute()
-                
+
+                supabase.table("policies").insert(
+                    {
+                        "user_mobile": st.session_state.user_mobile,
+                        "premium": plan_data["premium"],
+                        "coverage_per_day": plan_data["coverage"],
+                        "risk_level": "medium",
+                        "active": True,
+                    }
+                ).execute()
+
                 st.success("Plan selected & saved!")
                 st.rerun()
 
         st.stop()
 
-    # ---------------- NAVIGATED PAGES ----------------
-    plan = st.session_state.selected_plan
+    page = st.sidebar.radio("Navigate", ["Dashboard", "My Policy", "Claims", "Admin"])
 
+    claims = fetch_claims(user_mobile)
+
+    # ---------------- NAVIGATED PAGES ----------------
     if page == "Dashboard":
         st.title("🏠 Rider Dashboard")
 
-        st.write(f"👋 Welcome, {user['name']}")
-        st.write(f"📍 Location: {user['location']}")
-        st.write(f"🚴 Platform: {user['platform']}")
+        st.markdown("### 👋 Welcome back!")
+        st.divider()
+
+        # ---- POLICY CARD ----
+        st.markdown("### 📄 Your Policy")
+
+        if policy:
+            col1, col2, col3 = st.columns(3)
+            col1.metric("Plan", "Active")
+            col2.metric("Weekly Premium", f"₹{policy['premium']}")
+            col3.metric("Coverage / Day", f"₹{policy['coverage_per_day']}")
+        else:
+            st.warning("No active policy found")
 
         st.divider()
 
-        col1, col2, col3 = st.columns(3)
-        col1.metric("Plan", plan["name"])
-        col2.metric("Weekly Premium", f"₹{plan['premium']}")
-        col3.metric("Coverage / Day", f"₹{plan['coverage']}")
+        # ---- STATUS CARD ----
+        st.markdown("### 📡 Live Status")
+
+        if st.session_state.get("event_active"):
+            st.error("🌧️ Heavy Rain Detected → Auto payout triggered")
+        else:
+            st.success("✅ No disruption detected. You are protected")
 
         st.divider()
 
-        st.subheader("📡 Current Status")
-        st.info("No disruption detected. You are covered ✅")
-
-        st.divider()
-
-        st.subheader("⚡ Simulate Disruption (Demo)")
-
+        st.markdown("### ⚡ Demo — Simulate disruption")
+        st.caption("Triggers a sample rain event and records a claim.")
         if st.button("Trigger Rain Event 🌧️"):
             event_name = "Heavy Rain"
             now = datetime.now()
@@ -174,32 +220,47 @@ if st.session_state.logged_in:
                 st.session_state.event_active = True
                 st.session_state.event_triggered = True
 
-                new_claim = {
-                    "event": event_name,
-                    "amount": plan["coverage"],
-                    "status": "Paid",
-                    "time": now.strftime("%Y-%m-%d %H:%M:%S")
-                }
-                st.session_state.claims.append(new_claim)
-                
-                # Save claim to Supabase
-                supabase.table("claims").insert({
-                    "user_mobile": st.session_state.user_mobile,
-                    "event_type": event_name,
-                    "payout_amount": plan["coverage"],
-                    "status": "triggered"
-                }).execute()
-                
-                st.success(f"{event_name} detected → ₹{plan['coverage']} credited 💰")
+                payout = policy["coverage_per_day"]
+
+                supabase.table("claims").insert(
+                    {
+                        "user_mobile": st.session_state.user_mobile,
+                        "event_type": event_name,
+                        "payout_amount": payout,
+                        "status": "triggered",
+                    }
+                ).execute()
+
+                st.success(f"{event_name} detected — ₹{payout} credited.")
+                st.rerun()
             else:
                 remaining = EVENT_COOLDOWN - (now - last_time)
-                st.warning(f"{event_name} already processed. Try again in {remaining.seconds} sec")
+                st.warning(
+                    f"{event_name} was processed recently. Try again in {remaining.seconds} seconds."
+                )
 
         st.divider()
 
-        st.subheader("💰 Earnings Protected")
-        total = sum(c["amount"] for c in st.session_state.claims)
-        st.metric("Total Saved", f"₹{total}")
+        # ---- RECENT CLAIMS ----
+        st.markdown("### 🧾 Recent Claims")
+
+        if not claims:
+            st.info("No claims yet")
+        else:
+            for c in claims[:5]:
+                st.markdown(
+                    f"""
+**{_claim_title(c.get('event_type', ''))}**  
+💰 ₹{c.get('payout_amount', '—')}  
+📌 Status: {c.get('status', '—')}
+"""
+                )
+                st.divider()
+
+        st.markdown("### 💰 Earnings Protected")
+
+        total = sum(int(c["payout_amount"]) for c in claims)
+        st.metric("Total Saved This Period", f"₹{total}")
 
     elif page == "My Policy":
         st.title("📄 My Policy")
@@ -210,14 +271,18 @@ if st.session_state.logged_in:
 
         st.divider()
 
-        st.write(f"**Plan:** {plan['name']}")
-        st.write(f"**Weekly Premium:** ₹{plan['premium']}")
-        st.write(f"**Coverage per Day:** ₹{plan['coverage']}")
+        if policy:
+            st.write(f"**Plan:** {plan_label(policy)}")
+            st.write(f"**Weekly Premium:** ₹{policy['premium']}")
+            st.write(f"**Coverage per Day:** ₹{policy['coverage_per_day']}")
+        else:
+            st.warning("No active policy found")
 
         st.divider()
 
         st.subheader("📍 Risk Details")
-        st.write(f"Risk Level: 🟡 Medium")
+        risk = policy.get("risk_level", "medium") if policy else "—"
+        st.write(f"Risk Level: {risk}")
         st.write(f"Location: {user['location']}")
         st.write("Reason: Moderate rainfall and pollution in your city")
 
@@ -225,12 +290,75 @@ if st.session_state.logged_in:
 
     elif page == "Claims":
         st.title("🧾 Claims History")
+        st.markdown("Full list of claims linked to your account.")
 
-        if len(st.session_state.claims) == 0:
+        st.divider()
+
+        if not claims:
             st.info("No claims yet")
         else:
-            for claim in st.session_state.claims:
-                st.write(f"🌧️ {claim['event']} → ₹{claim['amount']} → {claim['time']} → ✅ {claim['status']}")
+            for c in claims:
+                st.markdown(
+                    f"""
+**{_claim_title(c.get('event_type', ''))}**  
+💰 ₹{c.get('payout_amount', '—')}  
+📌 Status: {c.get('status', '—')}
+"""
+                )
+                st.divider()
+
+    elif page == "Admin":
+        st.title("🧑‍💻 Admin Dashboard")
+        st.caption("Monitor users, policies, claims & payouts in real-time")
+
+        st.divider()
+
+        # ---- FETCH DATA ----
+        users_res = supabase.table("users").select("*").execute()
+        policies_res = supabase.table("policies").select("*").execute()
+        claims_res = supabase.table("claims").select("*").execute()
+
+        users = users_res.data or []
+        policies = policies_res.data or []
+        claims = claims_res.data or []
+
+        st.markdown("### 📊 Key Metrics")
+
+        col1, col2, col3, col4 = st.columns(4)
+
+        col1.metric("👥 Users", len(users))
+        col2.metric("📄 Policies", len(policies))
+        col3.metric("🧾 Claims", len(claims))
+
+        total_payout = sum(int(c["payout_amount"]) for c in claims) if claims else 0
+        col4.metric("💰 Total Payout", f"₹{total_payout}")
+
+        st.divider()
+
+        st.markdown("### 👥 Users Overview")
+
+        if users:
+            st.dataframe(users, use_container_width=True)
+        else:
+            st.info("No users registered yet")
+
+        st.divider()
+
+        st.markdown("### 📄 Active Policies")
+
+        if policies:
+            st.dataframe(policies, use_container_width=True)
+        else:
+            st.info("No policies created yet")
+
+        st.divider()
+
+        st.markdown("### 🧾 Claims Activity")
+
+        if claims:
+            st.dataframe(claims, use_container_width=True)
+        else:
+            st.info("No claims triggered yet")
 
     st.stop()
 
@@ -245,10 +373,10 @@ if auth_mode == "Sign Up":
 
     name = st.text_input("Full Name")
     mobile = st.text_input("Mobile Number")
-    
+
     platform = st.selectbox(
         "Delivery Platform",
-        ["Swiggy", "Zomato", "Uber Eats", "Zepto", "Dunzo"]
+        ["Swiggy", "Zomato", "Uber Eats", "Zepto", "Dunzo"],
     )
 
     city = st.text_input("City / Working Location")
@@ -258,7 +386,7 @@ if auth_mode == "Sign Up":
         # VALIDATIONS
         if len(mobile) != 10 or not mobile.isdigit():
             st.error("Mobile number must be exactly 10 digits")
-        
+
         elif len(password) < 6:
             st.error("Password must be at least 6 characters")
 
@@ -269,13 +397,15 @@ if auth_mode == "Sign Up":
                 st.error("User already exists")
 
             else:
-                supabase.table("users").insert({
-                    "name": name,
-                    "mobile": mobile,
-                    "password": password,
-                    "platform": platform,
-                    "location": city
-                }).execute()
+                supabase.table("users").insert(
+                    {
+                        "name": name,
+                        "mobile": mobile,
+                        "password": password,
+                        "platform": platform,
+                        "location": city,
+                    }
+                ).execute()
 
                 st.success("Registered successfully!")
                 st.session_state.logged_in = True

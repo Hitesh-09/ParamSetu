@@ -6,11 +6,6 @@ st.set_page_config(page_title="Admin Dashboard", layout="wide")
 
 st.title("🧑‍💼 Admin Dashboard")
 
-st.caption(
-    "Loads users, policies, and claims **directly from Supabase** (same source as the rider app). "
-    "You do **not** need the FastAPI server running for this dashboard."
-)
-
 
 @st.cache_data(ttl=30)
 def load_users():
